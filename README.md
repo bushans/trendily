@@ -8,6 +8,8 @@ Uses multiple neural networks (with a ResNet50 backbone) behind the scenes to cl
 
 Use [pip](https://pip.pypa.io/en/stable/) to install the requirements.
 
+Note: This repo works on Linux environment only as fastai and Annoy are NOT supported on other OS as far as I know so far.
+
 ```bash
 pip install -r requirements.txt
 ```

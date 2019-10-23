@@ -1,9 +1,17 @@
-from flask import Flask, request, render_template, url_for, flash, redirect
+from flask import Flask, jsonify, request, render_template, url_for, flash, redirect
 from predict import Predict
 from werkzeug.utils import secure_filename
 import os
+import stripe
 
 app = Flask(__name__)
+
+stripe_keys = {
+  'secret_key': os.environ['STRIPE_SECRET_KEY'],
+  'publishable_key': os.environ['STRIPE_PUBLISHABLE_KEY']
+}
+
+stripe.api_key = stripe_keys['secret_key']
 
 p = Predict()
 
@@ -14,6 +22,28 @@ ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg'])
 def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/')
+def index():
+    return render_template('index.html', key=stripe_keys['publishable_key'])
+
+@app.route('/charge', methods=['POST'])
+def charge():
+    try:
+        amount = 500   # amount in cents
+        customer = stripe.Customer.create(
+            email='sample@customer.com',
+            source=request.form['stripeToken']
+        )
+        stripe.Charge.create(
+            customer=customer.id,
+            amount=amount,
+            currency='usd',
+            description='Flask Charge'
+        )
+        return render_template('charge.html', amount=amount)
+    except stripe.error.StripeError:
+        return render_template('error.html')
 
 @app.route('/home', methods=['GET'])
 def render_home():

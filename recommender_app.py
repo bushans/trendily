@@ -16,6 +16,10 @@ def allowed_file(filename):
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+@app.route('/', methods=['GET'])
+def render_home():
+    return render_template('home.html')
+
 @app.route('/home', methods=['GET'])
 def render_home():
     return render_template('home.html')

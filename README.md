@@ -20,6 +20,9 @@ To run the web server, simply execute flask with the main recommender app:
 
 ```sh
 FLASK_APP=recommender_app flask run
+
+flask run --host=0.0.0.0
+FLASK_APP=recommender_app flask run --host=148.181.168.85
 ```
 
 The main predictor can also be used independently of Flask, by calling `get_recs`:

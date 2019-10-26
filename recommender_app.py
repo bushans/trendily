@@ -42,8 +42,7 @@ def charge():
             description='Flask Charge'
         )
         # return render_template('charge.html', amount=amount)
-        flash('Thanks for your payment!')
-        return  redirect('/home') 
+        return  redirect('/') 
     except stripe.error.StripeError:
         return render_template('error.html')
 

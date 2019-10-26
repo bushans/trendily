@@ -32,7 +32,7 @@ def index():
     if request.method == 'POST':
         try:
             # render_template('charge.html', amount=amount)
-            return  redirect('/home')
+            return  render_template('home.html')
         except:
             return 'There was an issue adding your task'
 

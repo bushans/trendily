@@ -23,9 +23,20 @@ def allowed_file(filename):
     return '.' in filename and \
         filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-@app.route('/')
+# @app.route('/')
+# def index():
+#    return render_template('index.html', key=stripe_keys['publishable_key'])
+
+@app.route('/', methods=['POST', 'GET'])
 def index():
-    return render_template('index.html', key=stripe_keys['publishable_key'])
+    if request.method == 'POST':
+        try:
+            render_template('charge.html', amount=amount)
+        except:
+            return 'There was an issue adding your task'
+
+    else:
+        return render_template('home.html')
 
 @app.route('/charge', methods=['POST'])
 def charge():

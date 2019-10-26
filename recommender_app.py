@@ -31,7 +31,7 @@ def allowed_file(filename):
 def index():
     if request.method == 'POST':
         try:
-            render_template('charge.html', amount=amount)
+            # render_template('charge.html', amount=amount)
             return  redirect('/home')
         except:
             return 'There was an issue adding your task'

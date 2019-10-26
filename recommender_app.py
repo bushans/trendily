@@ -32,11 +32,12 @@ def index():
     if request.method == 'POST':
         try:
             render_template('charge.html', amount=amount)
+            return  redirect('/home')
         except:
             return 'There was an issue adding your task'
 
     else:
-        return render_template('home.html')
+        return render_template('index.html', key=stripe_keys['publishable_key'])
 
 @app.route('/charge', methods=['POST'])
 def charge():

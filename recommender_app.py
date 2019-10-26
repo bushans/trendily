@@ -54,6 +54,7 @@ def charge():
             description='Flask Charge'
         )
         # return render_template('charge.html', amount=amount)
+        render_template('charge.html', amount=amount)
         return  redirect('/home') 
     except stripe.error.StripeError:
         return render_template('error.html')

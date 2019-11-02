@@ -13,7 +13,7 @@ stripe_keys = {
   'secret_key': os.environ['STRIPE_SECRET_KEY'],
   'publishable_key': os.environ['STRIPE_PUBLISHABLE_KEY']
 }
-
+print(stripe_keys.get('secret_key'))
 if stripe_keys.get('secret_key') != -1:
     stripe.api_key = stripe_keys['secret_key']
 else:

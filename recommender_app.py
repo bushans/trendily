@@ -6,13 +6,19 @@ import stripe
 
 app = Flask(__name__)
 
+STRIPE_PUBLISHABLE_KEY = 'pk_test_1Hv3MowOs3l0jNrEmHITabcw002vq1NuIp'
+STRIPE_SECRET_KEY = 'sk_test_DXWufFtOIxTe4ZeXrFxwqEyv00hwFNaNFr'
+
 stripe_keys = {
   'secret_key': os.environ['STRIPE_SECRET_KEY'],
   'publishable_key': os.environ['STRIPE_PUBLISHABLE_KEY']
 }
 
-stripe.api_key = stripe_keys['secret_key']
-
+if stripe_keys.get('secret_key') != None:
+    stripe.api_key = stripe_keys['secret_key']
+else:
+    stripe.api_key = STRIPE_SECRET_KEY
+    
 p = Predict()
 
 UPLOAD_FOLDER = 'static'

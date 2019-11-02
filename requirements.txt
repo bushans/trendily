@@ -10,3 +10,4 @@ Flask==1.0.2
 Werkzeug==0.14.1
 gunicorn==19.9.0
 Annoy
+stripe
